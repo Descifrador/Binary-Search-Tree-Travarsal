@@ -159,8 +159,6 @@ public final class StdDraw implements ActionListener {
         JMenuItem menuItem1 = new JMenuItem(" Save ");
         menuItem1.addActionListener(std);
         menuItem1.setActionCommand("save");
-        menuItem1.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         menu1.add(menuItem1);
 
         JMenu menu3 = new JMenu("Help");
