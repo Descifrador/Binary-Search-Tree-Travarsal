@@ -38,9 +38,6 @@ public class InitialDialog extends JDialog implements ActionListener {
                 if (opener.getFile() != null) {
                     dataMap.setFile(new File(opener.getDirectory() + File.separator + opener.getFile()));
                     fileName.setText(opener.getFile());
-                } else {
-                    dataMap.setFile(new File("tree.txt"));
-                    fileName.setText("Default: 'tree.txt'");
                 }
             });
 
@@ -134,7 +131,7 @@ public class InitialDialog extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         Object source = actionEvent.getSource();
         if (source == confirmButton) {
-            if (dataMap.width == null || dataMap.traversal == null) {
+            if (dataMap.width == null || dataMap.traversal == null || dataMap.file == null) {
                 JOptionPane.showMessageDialog(contentPanel, "Please select one or more options");
             }
         }
