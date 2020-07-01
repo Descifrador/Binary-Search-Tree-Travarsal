@@ -25,7 +25,8 @@ public class Main {
             }
             input.close();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Some Error Occurred");
+            JOptionPane.showMessageDialog(null, "Maybe you didn't choose correct file !!");
+            System.exit(1);
         }
         tree.init(dataMap.width == 1200 ? 400 : 600, 700, dataMap.speed, dataMap.compareMode);
         StdDraw.setCanvasSize(dataMap.width, 600);
@@ -69,6 +70,7 @@ public class Main {
                 postThread.join();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Thread Terminated Unexpectedly");
+                System.exit(1);
             }
         } else if (!dataMap.compareMode && "inorder".equals(dataMap.traversal)) {
             StdDraw.text(300, -5, "InOrder");

@@ -134,6 +134,8 @@ public class InitialDialog extends JDialog implements ActionListener {
             if (dataMap.width == null || dataMap.traversal == null || dataMap.file == null) {
                 JOptionPane.showMessageDialog(contentPanel, "Please select one or more options");
             }
+        } else if (source == cancelButton) {
+            System.exit(0);
         }
         dispose();
     }

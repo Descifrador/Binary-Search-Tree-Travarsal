@@ -1,15 +1,16 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DirectColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 @SuppressWarnings("DuplicatedCode")
 public final class StdDraw implements ActionListener {
@@ -163,11 +164,6 @@ public final class StdDraw implements ActionListener {
 
         JMenu menu3 = new JMenu("Help");
         menuBar.add(menu3);
-
-        JMenuItem help = new JMenuItem("Help");
-        help.setActionCommand("help");
-        menu3.add(help);
-        help.addActionListener(std);
 
         JMenuItem github = new JMenuItem("GitHub");
         github.setActionCommand("github");
@@ -505,10 +501,46 @@ public final class StdDraw implements ActionListener {
                 }
                 break;
             case "about":
-                JOptionPane.showMessageDialog(StdDraw.frame, "Created By:");
+                JOptionPane.showMessageDialog(StdDraw.frame,
+                        "This application was developed as a End Semester\n" +
+                                "Project for the course Data Structures CSD-223\n" +
+                                "under Er. Nitin Gupta by following students:-\n" +
+                                "Puja Nehra\n" +
+                                "Harsimranjeet Singh Saini\n" +
+                                "Avinal Kumar\n" +
+                                "\n" +
+                                "Hope you enjoyed using it.\n" +
+                                "Please report issues on the GitHub Repository.",
+                        "About",
+                        JOptionPane.INFORMATION_MESSAGE);
                 break;
-            case "help":
-                JOptionPane.showMessageDialog(StdDraw.frame, "Get help here");
+            case "github":
+                JLabel gitLabel = new JLabel();
+                Font font = gitLabel.getFont();
+
+                StringBuffer style = new StringBuffer("font-family:" + font.getFamily() + ";");
+                style.append("font-weight:" + (font.isBold() ? "bold" : "normal") + ";");
+                style.append("font-size:" + font.getSize() + "pt;");
+
+                JEditorPane theLink = new JEditorPane("text/html", "<html><body style=\"\"" +
+                        style + "\">"
+                        + "Project Repository: <a href=\"https://github.com/avinal/Binary-Search-Tree-Traversal/\">Binary Search Tree Traversal</a>"
+                        + "</body></html>");
+
+                theLink.addHyperlinkListener(e1 -> {
+                    if (e1.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
+                        try {
+                            Desktop.getDesktop().browse(e1.getURL().toURI());
+                        } catch (IOException | URISyntaxException ioException) {
+                            JOptionPane.showMessageDialog(StdDraw.frame, "Link Error",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                });
+                theLink.setEditable(false);
+                theLink.setBackground(gitLabel.getBackground());
+                JOptionPane.showMessageDialog(StdDraw.frame, theLink,
+                        "GitHub Repository", JOptionPane.INFORMATION_MESSAGE);
                 break;
         }
     }
