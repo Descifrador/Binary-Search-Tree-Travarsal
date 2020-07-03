@@ -4,23 +4,79 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
+/**
+ * Binary Search Tree Class.
+ */
 @SuppressWarnings("DuplicatedCode")
 public class BinarySearchTree {
+    /**
+     * Keeps track of the visited node in a set. Set ensures that no node is duplicated.
+     * Similar to {@link #preVisited}, {@link #postVisited} and {@link #levelVisited}.
+     */
+    private static final Set<Node> inVisited = new HashSet<>();
+    /**
+     * Keeps track of the visited node in a set. Set ensures that no node is duplicated.
+     * Similar to {@link #inVisited}, {@link #postVisited} and {@link #levelVisited}.
+     */
+    private static final Set<Node> preVisited = new HashSet<>();
+    /**
+     * Keeps track of the visited node in a set. Set ensures that no node is duplicated.
+     * Similar to {@link #preVisited}, {@link #inVisited} and {@link #levelVisited}.
+     */
+    private static final Set<Node> postVisited = new HashSet<>();
+    /**
+     * Keeps track of the visited node in a set. Set ensures that no node is duplicated.
+     * Similar to {@link #preVisited}, {@link #postVisited}, {@link #inVisited}.
+     */
+    private static final Set<Node> levelVisited = new HashSet<>();
+    /**
+     * Stores the last encountered node. Not needed for general drawing. Used to show path.
+     * Similar to {@link #preLast}, {@link #postLast} and {@link #levelLast}.
+     */
+    private static Node inLast = null;
+    /**
+     * Stores the last encountered node. Not needed for general drawing. Used to show path.
+     * Similar to {@link #inLast}, {@link #postLast} and {@link #levelLast}.
+     */
+    private static Node preLast = null;
+    /**
+     * Stores the last encountered node. Not needed for general drawing. Used to show path.
+     * Similar to {@link #preLast}, {@link #inLast} and {@link #levelLast}.
+     */
+    private static Node postLast = null;
+    /**
+     * Stores the last encountered node. Not needed for general drawing. Used to show path.
+     * Similar to {@link #preLast}, {@link #postLast} and {@link #inLast}.
+     */
+    private static Node levelLast = null;
+    /**
+     * The root Node
+     */
     Node root;
-    int maxHeight = 0;
-    int nodeNumber = 0;
-    int SCREEN_WIDTH = 600;
-    int SCREEN_HEIGHT = 700;
-    int XSCALE;
-    int YSCALE;
-    int SPEED = 1000;
-    int preOffset = 0;
-    int postOffset = 0;
+    private int maxHeight = 0;
+    private int nodeNumber = 0;
+    private int SCREEN_WIDTH = 600;
+    private int SCREEN_HEIGHT = 700;
+    private int XSCALE;
+    private int YSCALE;
+    private int SPEED = 1000;
+    private int preOffset = 0;
+    private int postOffset = 0;
 
+    //default constructor
     BinarySearchTree() {
         root = null;
     }
 
+    /**
+     * Initializes the remaining data of Binary Search Tree after the tree has been created.
+     * Calls {@link #computeNodeCoordinates()} and {@link #treeHeight(Node)}.
+     *
+     * @param width   the width of the canvas, in general 600 and 1200 for compare mode
+     * @param height  the height of the canvas, default 700
+     * @param speed   the speed of the drawing, defaults to 1 Node/sec
+     * @param compare if compare mode has been enabled or not
+     */
     public void init(int width, int height, int speed, Boolean compare) {
         if (root != null) {
             computeNodeCoordinates();
@@ -37,6 +93,12 @@ public class BinarySearchTree {
         }
     }
 
+    /**
+     * Calculates the height of the tree by recursion
+     *
+     * @param t root node of the tree
+     * @return the height of the tree
+     */
     private int treeHeight(Node t) {
         if (t == null) {
             return -1;
@@ -45,11 +107,22 @@ public class BinarySearchTree {
         }
     }
 
+    /**
+     * Computes Node coordinates by inorder traversal. Inorder traversal ensures that all nodes
+     * gets proper spacing noth in x and y axes. Internally calls {@link #inorder_traversal(Node, int)}.
+     */
     private void computeNodeCoordinates() {
         int depth = 1;
         inorder_traversal(root, depth);
     }
 
+    /**
+     * Inorder Traversal to compute node coordinates. Could be Preorder or Postorder too but relative
+     * positioning of the nodes remains same however the tree get askew.
+     *
+     * @param t     root node to initiate
+     * @param depth parameter used for making recursion useful
+     */
     private void inorder_traversal(Node t, int depth) {
         if (t != null) {
             inorder_traversal(t.left, depth + 1);
@@ -61,9 +134,17 @@ public class BinarySearchTree {
         }
     }
 
+    /**
+     * Recursive routine to insert a new node into the tree. Binary Search Tree posses special properties.
+     * Data is feed as a string {@code s} later parsed to integer and inserted by comparision.
+     *
+     * @param root root node of the tree
+     * @param s    integers as string
+     * @return root node of the tree
+     */
     public Node insert(Node root, String s) {
         if (root == null) {
-            root = new Node(s, null,null);
+            root = new Node(s, null, null);
         } else {
             if (Integer.parseInt(s) == Integer.parseInt(root.data)) {
                 return root;
@@ -80,10 +161,12 @@ public class BinarySearchTree {
         return root;
     }
 
-
-    private static final Set<Node> inVisited = new HashSet<>();
-    private static Node inLast = null;
-
+    /**
+     * Recursive drawing routine to visualize Inorder Traversal of the tree. Animates one node at a time.
+     *
+     * @param node initially root node to be passed
+     * @param path the path should be shown or not
+     */
     public void drawInOrder(Node node, Boolean path) {
         int x1, y1, x2, y2, x3, y3;
         if (node != null) {
@@ -123,9 +206,12 @@ public class BinarySearchTree {
         }
     }
 
-    private static final Set<Node> preVisited = new HashSet<>();
-    private static Node preLast = null;
-
+    /**
+     * Recursive drawing routine to visualize Preorder Traversal of the tree. Animates one node at a time.
+     *
+     * @param node initially root node to be passed
+     * @param path the path should be shown or not
+     */
     public void drawPreOrder(Node node, Boolean path) {
         int x1, y1, x2, y2, x3, y3;
         if (node != null) {
@@ -165,9 +251,12 @@ public class BinarySearchTree {
         }
     }
 
-    private static final Set<Node> postVisited = new HashSet<>();
-    private static Node postLast = null;
-
+    /**
+     * Recursive drawing routine to visualize Postorder Traversal of the tree. Animates one node at a time.
+     *
+     * @param node initially root node to be passed
+     * @param path the path should be shown or not
+     */
     public void drawPostOrder(Node node, Boolean path) {
         int x1, y1, x2, y2, x3, y3;
         if (node != null) {
@@ -210,10 +299,15 @@ public class BinarySearchTree {
         }
     }
 
-    private static final Set<Node> levelVisited = new HashSet<>();
-    private static Node levelLast = null;
     private static final Queue<Node> levelNode = new LinkedList<>();
 
+    /**
+     * Recursive drawing routine to visualize Level Traversal of the tree. Animates one node at a time.
+     * Also Knows as Breadth First Search
+     *
+     * @param node initially root node to be passed
+     * @param path the path should be shown or not
+     */
     public void drawLevelOrder(Node node, Boolean path) {
         int x1, y1, x2, y2, x3, y3;
         levelNode.add(node);
@@ -258,14 +352,47 @@ public class BinarySearchTree {
     }
 }
 
+/**
+ * Node class to form Binary Search Tree.
+ */
 class Node {
+    /**
+     * Data of the Node
+     */
     String data;
+
+    /**
+     * abscissa of the Node
+     */
     int xpos;
+
+    /**
+     * Ordinate of the Node
+     */
     int ypos;
+
+    /**
+     * Left child of the Node
+     */
     Node left;
+
+    /**
+     * Right child of the node
+     */
     Node right;
+
+    /**
+     * Contains closest neighbours of a node. Maximum 3 and at least 1.
+     */
     Set<Node> neighbour = new HashSet<>();
 
+    /**
+     * Default constructor of the Node class.
+     *
+     * @param data  data of the node
+     * @param left  left child
+     * @param right right child
+     */
     Node(String data, Node left, Node right) {
         this.left = left;
         this.right = right;

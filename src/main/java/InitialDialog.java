@@ -2,8 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
+/**
+ * InitialDialog class
+ */
 public class InitialDialog extends JDialog implements ActionListener {
     JPanel contentPanel = new JPanel(new BorderLayout());
 
@@ -11,14 +16,16 @@ public class InitialDialog extends JDialog implements ActionListener {
     JLabel fileName = new JLabel("Open a File");
     JButton openButton = new JButton("Open");
 
-    JPanel traversePane = new JPanel(new GridLayout(3, 1));
+    /**
+     * This is used to store initialization values after action performed by user.
+     */
+    private final DataStructure dataMap = new DataStructure();
     JRadioButton inRadio = new JRadioButton("InOrder");
     JRadioButton preRadio = new JRadioButton("PreOrder");
     JRadioButton postRadio = new JRadioButton("PostOrder");
     JRadioButton levelRadio = new JRadioButton("LevelOrder");
     ButtonGroup traverseRadio = new ButtonGroup();
-
-    JPanel experimentPane = new JPanel(new GridLayout(3, 1));
+    JPanel traversePane = new JPanel(new GridLayout(4, 1));
     JCheckBox showPath = new JCheckBox("Show Path");
     JCheckBox compareMode = new JCheckBox("Compare Mode");
     JSlider speed = new JSlider(500, 1500, 1000);
@@ -26,11 +33,17 @@ public class InitialDialog extends JDialog implements ActionListener {
     JPanel confirmPane = new JPanel();
     JButton confirmButton = new JButton("Confirm");
     JButton cancelButton = new JButton("Cancel");
+    JPanel experimentPane = new JPanel(new GridLayout(4, 1));
 
-    private final DataStructure dataMap = new DataStructure();
-
+    /**
+     * Default Constructor
+     *
+     * @param parent JFrame used as parent Window
+     */
     public InitialDialog(Frame parent) {
         super(parent, "Choose Options", true);
+
+        // File Pane Initialization Block
         {
             openButton.addActionListener(e -> {
                 FileDialog opener = new FileDialog(this, "Use a text file containing numbers only", FileDialog.LOAD);
@@ -47,6 +60,7 @@ public class InitialDialog extends JDialog implements ActionListener {
             contentPanel.add(filePane, BorderLayout.NORTH);
         }
 
+        // Traversal Radiobutton Pane Initialization Block
         {
             traverseRadio.add(inRadio);
             traverseRadio.add(preRadio);
@@ -85,6 +99,7 @@ public class InitialDialog extends JDialog implements ActionListener {
             contentPanel.add(traversePane, BorderLayout.WEST);
         }
 
+        // Experiment Pane Initialization Block
         {
             showPath.addActionListener(e -> {
                 if (showPath.isSelected()) {
@@ -114,6 +129,7 @@ public class InitialDialog extends JDialog implements ActionListener {
             contentPanel.add(experimentPane, BorderLayout.EAST);
         }
 
+        // Confirm Pane Initialization Block
         {
             confirmButton.addActionListener(this);
             cancelButton.addActionListener(this);
@@ -124,9 +140,20 @@ public class InitialDialog extends JDialog implements ActionListener {
             contentPanel.add(confirmPane, BorderLayout.SOUTH);
         }
         this.getContentPane().add(contentPanel);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
         this.pack();
     }
 
+    /**
+     * Handles the action performed on {@link #confirmButton} and {@link #cancelButton}.
+     *
+     * @param actionEvent Event performed
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Object source = actionEvent.getSource();
@@ -140,18 +167,50 @@ public class InitialDialog extends JDialog implements ActionListener {
         dispose();
     }
 
+    /**
+     * This method invokes the Initial Dialog Class.
+     *
+     * @return {@link #dataMap} containing user interactions.
+     */
     public DataStructure run() {
         this.setVisible(true);
         return dataMap;
     }
 }
 
+/**
+ * Container Class to hold data selected/enter by the used when application starts.
+ */
 class DataStructure {
+    /**
+     * Width of the Drawing Area.
+     */
     Integer width = 600;
+
+    /**
+     * Traversal types: inorder, preorder, postorder, levelorder
+     */
     String traversal;
+
+    /**
+     * Enable/Disables the show path feature in drawing routines.
+     */
     Boolean showPath = false;
+
+    /**
+     * Enable/Disables the comparision mode, currently only supports comparision between
+     * inorder, preorder and postorder.
+     */
     Boolean compareMode = false;
+
+    /**
+     * Drawing speed.
+     */
     Integer speed = 1000;
+
+    /**
+     * File chosen for tree creation. Must contain numbers only.
+     */
     File file;
 
     public void setWidth(Integer width) {

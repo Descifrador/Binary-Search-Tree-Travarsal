@@ -1,21 +1,30 @@
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+/**
+ * Main Class
+ */
 public class Main {
-
-
     public static void main(String[] args) {
         StdDraw.enableDoubleBuffering();
         drawRoutine(StdDraw.dataStructure);
     }
 
+    /**
+     * Controller method to perform action based on user input.
+     *
+     * @param dataMap provides initialization options
+     */
     public static void drawRoutine(DataStructure dataMap) {
         BinarySearchTree tree = new BinarySearchTree();
         BufferedReader diskInput;
         String word;
+
+        // Tree formation sequence
         try {
             diskInput = new BufferedReader(new InputStreamReader(new FileInputStream(dataMap.file)));
             Scanner input = new Scanner(diskInput);
@@ -24,15 +33,18 @@ public class Main {
                 tree.root = tree.insert(tree.root, word);
             }
             input.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Maybe you didn't choose correct file !!");
             System.exit(1);
         }
+
         tree.init(dataMap.width == 1200 ? 400 : 600, 700, dataMap.speed, dataMap.compareMode);
         StdDraw.setCanvasSize(dataMap.width, 600);
         StdDraw.setXscale(0, dataMap.width);
         StdDraw.setYscale(-790, 10);
+
         if (dataMap.compareMode && "compare".equals(dataMap.traversal)) {
+            // Multithreading used to draw multiple tree at the same time in comparision mode.
             StdDraw.line(400, 10, 400, -790);
             StdDraw.line(800, 10, 800, -790);
 
@@ -69,7 +81,9 @@ public class Main {
                 preThread.join();
                 postThread.join();
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Thread Terminated Unexpectedly");
+                JOptionPane.showMessageDialog(null,
+                        "Thread Terminated Unexpectedly !",
+                        "Error", JOptionPane.ERROR_MESSAGE);
                 System.exit(1);
             }
         } else if (!dataMap.compareMode && "inorder".equals(dataMap.traversal)) {
