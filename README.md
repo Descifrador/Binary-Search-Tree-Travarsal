@@ -37,8 +37,50 @@ This mini-project was developed for the partial fulfilment of the  2nd year, 4th
 ```
 
 ## HighLights of the project
-When launched first time the selection menu appears.
-![Selection Menu]()
+1. When launched first time the selection menu appears.
+
+    ![Selection Menu](images/menu.png)
+    
+    * Traversal Options 
+        * InOrder : Root-Right-Left
+        * PreOrder : Right-Root-Left
+        * PostOrder : Right-Left-Root
+        * LevelOrder : Breadth-First-Traversal
+    * Choose File - Choose the text file.
+    * Experimental Features
+        * Compare Mode - Draw three DFS simultaneously
+        * Show Path - Draw the path of traversal
+        * Speed Selector - 0.5 second/node to 1.5 second/node
+2. Choose any options from **Traversal** pane and **Choose a File**. Given below is an example for sequence
+ 50 34 67 25 38 65 77 15 33.
+ 
+    ![Preorder for Sequence](images/inorderwp.png)
+    
+3. If we choose **Show Path** feature. Then the different traversals will show as below.
+    * Preorder with Show Path
+    
+    ![Preorder with Show Path](images/preorder.png)
+    
+    * Inorder with Show Path
+    
+    ![Inorder with Show Path](images/inorder.png)
+    
+    * Postorder with Show Path
+    
+    ![Postorder with Show Path](images/postorder.png)
+    
+    * Levelorder with Show Path 
+    
+    ![Levelorder with Show Path](images/levelorder.png)
+    
+4. If **Compare Mode** is activated then the following figure as snapshot occurs.
+    
+    ![Compare Mode ](images/compare.png)
+    
+    The compare mode was developed using multithreading.    
+    
+
+
  
 
  
