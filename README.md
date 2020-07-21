@@ -77,7 +77,9 @@ This mini-project was developed for the partial fulfilment of the  2nd year, 4th
     
     ![Compare Mode ](images/compare.png)
     
-    The compare mode was developed using multithreading.    
+    The compare mode was developed using multithreading. 
+ 
+5. Additionally you can set speed by using the slider.
     
 
 
