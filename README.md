@@ -21,17 +21,17 @@ This mini-project was developed for the partial fulfilment of the  2nd year, 4th
     * For jar run `java -jar Binary-Search-Tree.Traversal.main.jar` in terminal or command prompt.
     * Provide a text file containing numbers(An example is given in the repo).
 3. To build this project, clone this repo first.
-```shell script
+```
   git clone https://github.com/avinal/Binary-Search-Tree-Traversal
 ```
 4. If you have IntelliJ IDEA installed just open the project and build it the regular way.
 5. Or you may use gradle to build the project
-```shell script
+```
   cd Binary-Search-Tree-Traversal
   ./gradlew build
 ```
 6. Run the project
-```shell script
+```
   cd build/classes/java/main
   java Main.class
 ```
