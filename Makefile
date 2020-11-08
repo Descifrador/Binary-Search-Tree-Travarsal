@@ -1,8 +1,8 @@
 BASEDIR=$(CURDIR)
-OUTPUTDIR=$(BASEDIR)/docs # you may change docs with custom folder name
-PACKAGE=src/main/java/*.java # write the package name here
+OUTPUTDIR=$(BASEDIR)/output
+PACKAGE=$(BASEDIR)/src/main/java
 
 html:
-    javadoc "$(PACKAGE)" -d "$(OUTPUTDIR)" -encoding UTF-8
-    
+	javadoc -sourcepath "$(PACKAGE)" -d "$(OUTPUTDIR)" -encoding UTF-8 -subpackages .
+
 .PHONY: html
