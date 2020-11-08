@@ -23,6 +23,6 @@ jobs:
                     # Write the branch name for storing github pages source 
         PAGES_BRANCH: "gh-pages"
                     # Write the branch name having source files for site/documentation
-        BUILD_FROM: "master"
+        BUILD_FROM: "add-docs"
                     # Write the name of the output folder where generated html is stored by makefile.
         DOCS_FOLDER: "docs"
