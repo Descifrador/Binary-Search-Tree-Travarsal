@@ -1,8 +1,9 @@
 BASEDIR=$(CURDIR)
-OUTPUTDIR=$(BASEDIR)/output
+OUTPUTDIR=$(BASEDIR)/build/docs/javadocs
 PACKAGE=$(BASEDIR)/src/main/java
 
 html:
-	javadoc -sourcepath "$(PACKAGE)" -d "$(OUTPUTDIR)" -encoding UTF-8 -subpackages .
+	chmod +x gradlew
+	./gradlew javadoc
 
 .PHONY: html
