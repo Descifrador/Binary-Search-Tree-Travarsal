@@ -2,7 +2,7 @@ name: GitHub Pages Deploy Action
 on:
   # Branch name(s) which have the source file for site/documentation
   push:
-    branches: [ add-docs ]
+    branches: [ master ]
   
 jobs:
   deploy-pages:
@@ -23,6 +23,6 @@ jobs:
                     # Write the branch name for storing github pages source 
         PAGES_BRANCH: "gh-pages"
                     # Write the branch name having source files for site/documentation
-        BUILD_FROM: "add-docs"
+        BUILD_FROM: "master"
                     # Write the name of the output folder where generated html is stored by makefile.
         DOCS_FOLDER: "build/docs/javadoc"
