@@ -1,0 +1,10 @@
+-classpath '/github/workspace/Binary-Search-Tree-Travarsal/build/classes/java/main:/github/workspace/Binary-Search-Tree-Travarsal/build/resources/main'
+-d '/github/workspace/Binary-Search-Tree-Travarsal/build/docs/javadoc'
+-doctitle 'Binary-Search-Tree-Traversal 1.0-SNAPSHOT API'
+-notimestamp 
+-quiet 
+-windowtitle 'Binary-Search-Tree-Traversal 1.0-SNAPSHOT API'
+'/github/workspace/Binary-Search-Tree-Travarsal/src/main/java/Main.java'
+'/github/workspace/Binary-Search-Tree-Travarsal/src/main/java/StdDraw.java'
+'/github/workspace/Binary-Search-Tree-Travarsal/src/main/java/BinarySearchTree.java'
+'/github/workspace/Binary-Search-Tree-Travarsal/src/main/java/InitialDialog.java'
