@@ -1,4 +1,4 @@
-[![Gradle Actions Status](https://github.com/avinal/Binary-Search-Tree-Traversal/workflows/gradle/badge.svg)](https://github.com/avinal/Binary-Search-Tree-Traversal/actions)
+![docs](https://github.com/avinal/Binary-Search-Tree-Travarsal/workflows/GitHub%20Pages%20Deploy%20Action/badge.svg)
 # Binary-Search-Tree-Traversal
 Binary Search Tree Creation and Traversal Visualization from given node points using Drawing Algorithm in Java
 
